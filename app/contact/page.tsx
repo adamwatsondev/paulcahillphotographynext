@@ -227,7 +227,7 @@ export default function Home() {
             className="grid grid-cols-1 mt-0 xl:mt-0 2xl:-mt-20 place-items-center"
           >
             <Card className="w-full max-w-lg h-full">
-              <CardContent className="flex flex-col gap-8 justify-center">
+              <CardContent className="flex flex-col pt-8 gap-8 justify-center">
                 <div className="text-center">
                   <span className="text-black font-old-standard md:text-3xl text-xl font-bold leading-tight">
                     Interested in purchasing?
