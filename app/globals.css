@@ -81,3 +81,12 @@ body {
   flex: 0 0 100%;
   min-width: 0;
 }
+
+.blurred-background {
+  filter: blur(8px); /* Apply blur to the background */
+  transition: filter 0.3s ease; /* Smooth transition for the blur effect */
+}
+
+.blurred-background img {
+  pointer-events: none; /* Prevent interactions with images while blurred */
+}

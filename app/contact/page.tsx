@@ -61,7 +61,7 @@ export default function Home() {
     if (tab) {
       form.setValue("tab", tab);
     }
-  }, []);
+  }, [form]);
 
   const onSubmit = (data: FormData) => {
     emailjs
@@ -133,7 +133,7 @@ export default function Home() {
                     Got questions?
                   </span>
                   <span className="text-black font-old-standard md:text-xl text-lg font-medium leading-tight block mt-4">
-                    Contact me and let's have a chat.
+                    Contact me and let&apos;s have a chat.
                   </span>
                 </div>
 
@@ -226,7 +226,7 @@ export default function Home() {
             value="purchase"
             className="grid grid-cols-1 mt-0 xl:mt-0 2xl:-mt-20 place-items-center"
           >
-            <Card className="w-full max-w-lg h-full">
+            <Card className="w-full border-black max-w-lg h-full">
               <CardContent className="flex flex-col pt-8 gap-8 justify-center">
                 <div className="text-center">
                   <span className="text-black font-old-standard md:text-3xl text-xl font-bold leading-tight">
@@ -234,7 +234,7 @@ export default function Home() {
                   </span>
                   <span className="text-black font-old-standard md:text-xl text-lg font-medium leading-tight block mt-4">
                     Select the <strong>gallery</strong> and{" "}
-                    <strong>image number</strong> and I'll get back to you.
+                    <strong>image number</strong> and I&apos;ll get back to you.
                   </span>
                 </div>
 

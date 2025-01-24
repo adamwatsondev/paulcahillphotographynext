@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -9,20 +10,26 @@ export default function Footer() {
             href="/contact?tab=general"
             className="text-black bg-white focus:outline-none"
           >
-            <img
+            <Image
               className="h-12 w-12"
-              src="../images/Assets/mail.jpg"
+              src="/images/Assets/mail.jpg"
               alt="Mail"
+              quality={100}
+              width={20}
+              height={20}
             />
           </Link>
           <Link
             href="https://www.instagram.com/cahill_paul/?hl=en"
             className="text-black bg-white focus:outline-none"
           >
-            <img
+            <Image
               className="h-8 w-8"
-              src="../images/Assets/instagram-icon.png"
+              src="/images/Assets/instagram-icon.png"
               alt="Instagram"
+              quality={100}
+              width={20}
+              height={20}
             />
           </Link>
         </div>

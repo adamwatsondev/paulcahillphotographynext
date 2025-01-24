@@ -21,10 +21,10 @@ interface CloudinaryResource {
 
 async function fetchCloudinaryResources() {
   try {
-    const featuredGalleriesResponse = await cloudinary.search
-      .expression("tags=Featured")
+    const thumbnailGalleriesResponse = await cloudinary.search
+      .expression("tags=Thumbnail")
       .execute();
-    return featuredGalleriesResponse.resources || [];
+    return thumbnailGalleriesResponse.resources || [];
   } catch (error) {
     console.error("Failed to fetch resources from Cloudinary:", error);
     return [];
