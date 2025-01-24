@@ -36,9 +36,6 @@ async function fetchCloudinaryResources(): Promise<CloudinaryResource[]> {
 
 export default async function About() {
   const resources = await fetchCloudinaryResources();
-
-  console.log(resources);
-
   const profileImage = resources.length > 0 ? resources[0] : null;
 
   return (

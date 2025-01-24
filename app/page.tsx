@@ -45,7 +45,7 @@ export default async function Home() {
       </div>
       <div className="grid grid-cols-3 gap-12 px-4 md:px-10 lg:px-20 pb-20 mt-40">
         {/* Carousel */}
-        <div className="col-span-3 relative xl:h-[1000px] 2xl:h-[1600px] md:h-[800px] w-full">
+        <div className="col-span-3 relative md:h-[600px] mx-auto">
           <EmblaCarousel resources={resources} />
         </div>
 
@@ -57,17 +57,14 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
             {resources.map((product: CloudinaryResource) => (
-              <div
-                key={product.public_id}
-                className="flex flex-col gap-4 justify-center items-center"
-              >
+              <div key={product.public_id} className="flex flex-col gap-4">
                 <Link
                   href={`/galleries/${product.asset_folder
                     .replace(/\s+/g, "-")
                     .toLowerCase()}`}
                 >
                   <Image
-                    className="w-full h-[650px] object-fill"
+                    className="w-full h-[250px] md:h-[450px] xl:h-[500px] object-fit"
                     src={product.secure_url}
                     alt={product.public_id}
                     quality={100}
