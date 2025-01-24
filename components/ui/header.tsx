@@ -68,7 +68,7 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="absolute top-full left-0 w-full bg-white shadow-md z-10">
-            <nav className="flex justify-between items-center px-20 py-2">
+            <nav className="flex justify-between items-center px-20 py-4 gap-1">
               <Link
                 href="/"
                 className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"

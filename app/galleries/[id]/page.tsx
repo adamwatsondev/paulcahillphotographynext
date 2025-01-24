@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Footer from "@/components/ui/footer";
 import Header from "@/components/ui/header";
-import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import Lightbox from "react-spring-lightbox";
+import { RotatingLines } from "react-loader-spinner";
 
 interface CloudinaryResource {
   public_id: string;
@@ -91,7 +91,7 @@ export default function GalleryPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Skeleton className="h-6 w-3/4 bg-gray-200 rounded" />
+        <RotatingLines width="80" ariaLabel="loading" strokeColor="gray" />
       </div>
     );
   }
@@ -125,12 +125,9 @@ export default function GalleryPage() {
         {/* Galleries Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
           {resources.map((product: CloudinaryResource, index: number) => (
-            <div
-              key={product.public_id}
-              className="flex flex-col gap-4 justify-center items-center"
-            >
+            <div key={product.public_id} className="flex flex-col gap-4">
               <Image
-                className="w-full h-[650px] hover:cursor-pointer object-cover"
+                className="w-full h-[250px] md:h-[450px] xl:h-[500px] hover:cursor-pointer object-fill"
                 src={product.secure_url}
                 alt={product.public_id}
                 onClick={() => openLightbox(index)}

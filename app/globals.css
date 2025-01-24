@@ -73,20 +73,25 @@ body {
 
 .embla {
   overflow: hidden;
+  display: flex;
+  width: 100%;
 }
+
 .embla__container {
   display: flex;
 }
+
 .embla__slide {
-  flex: 0 0 100%;
-  min-width: 0;
+  flex: 0 0 content;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .blurred-background {
-  filter: blur(8px); /* Apply blur to the background */
-  transition: filter 0.3s ease; /* Smooth transition for the blur effect */
+  filter: blur(8px);
+  transition: filter 0.3s ease;
 }
 
 .blurred-background img {
-  pointer-events: none; /* Prevent interactions with images while blurred */
+  pointer-events: none;
 }

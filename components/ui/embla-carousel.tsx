@@ -2,9 +2,8 @@
 
 import React, { useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import { AdvancedImage } from "@cloudinary/react";
+import AutoScroll from "embla-carousel-auto-scroll";
 
 interface EmblaCarouselProps {
   resources: Array<{
@@ -15,7 +14,16 @@ interface EmblaCarouselProps {
 }
 
 export function EmblaCarousel({ resources }: EmblaCarouselProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "start" },
+    [
+      AutoScroll({
+        speed: 3,
+        playOnInit: true,
+        stopOnInteraction: false,
+      }),
+    ]
+  );
 
   useEffect(() => {
     if (emblaApi) {
@@ -28,18 +36,16 @@ export function EmblaCarousel({ resources }: EmblaCarouselProps) {
       <div className="embla__container">
         {resources.map((resource) => (
           <div
-            className="embla__slide xl:h-[1000px] 2xl:h-[1600px] md:h-[800px] w-full"
+            className="embla__slide xl:h-[600px] md:h-[800px] w-full"
             key={resource.public_id}
           >
             <Image
-              className="w-full h-full object-fill"
+              className="w-full max-h-[600px] h-[150px] md:h-[400px] xl:h-[650px] object-fill"
               src={resource.secure_url}
               alt={resource.public_id}
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
               quality={100}
               width={1000}
-              height={650}
+              height={1000}
             />
           </div>
         ))}

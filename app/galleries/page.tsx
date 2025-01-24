@@ -34,10 +34,6 @@ async function fetchCloudinaryResources() {
 export default async function Galleries() {
   const resources = await fetchCloudinaryResources();
 
-  if (resources.length === 0) {
-    return <div>No images found.</div>;
-  }
-
   return (
     <div className="flex flex-col gap-8 md:gap-20 pb-20">
       {/* Header */}
@@ -53,20 +49,17 @@ export default async function Galleries() {
         {/* Galleries Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
           {resources.map((product: CloudinaryResource) => (
-            <div
-              key={product.public_id}
-              className="flex flex-col gap-4 justify-center items-center"
-            >
+            <div key={product.public_id} className="flex flex-col gap-4">
               <Link
                 href={`/galleries/${product.asset_folder
                   .replace(/\s+/g, "-")
                   .toLowerCase()}`}
               >
                 <Image
-                  className="w-full h-[650px] object-cover"
+                  className="w-full h-[250px] md:h-[450px] xl:h-[500px] object-fit"
                   src={product.secure_url}
                   alt={product.public_id}
-                  quality={80}
+                  quality={100}
                   width={1000}
                   height={650}
                   placeholder="blur"
