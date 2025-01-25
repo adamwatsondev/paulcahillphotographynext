@@ -24,15 +24,20 @@ export default function GalleryPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
-    if (!id) {
-      setError("No folder specified in the URL.");
+    if (!id || Array.isArray(id)) {
+      setError("Invalid or missing folder specified in the URL.");
       setLoading(false);
       return;
     }
 
+    // Decode the URL-encoded folder name and handle spaces
+    const formattedFolderName = encodeURIComponent(id.replace(/-/g, " "));
+
     async function fetchResources() {
       try {
-        const response = await fetch(`/api/cloudinary?folder=${id}`);
+        const response = await fetch(
+          `/api/cloudinary?folder=${formattedFolderName}`
+        );
         const data = await response.json();
 
         if (response.ok) {
@@ -101,7 +106,7 @@ export default function GalleryPage() {
   }
 
   if (!resources.length) {
-    return <div>No images found for the folder `${id}`.</div>;
+    return <div>No images found for the folder `{id}`.</div>;
   }
 
   return (

@@ -51,7 +51,7 @@ export default async function Galleries() {
           {resources.map((product: CloudinaryResource) => (
             <div key={product.public_id} className="flex flex-col gap-4">
               <Link
-                href={`/galleries/${product.asset_folder
+                href={`/galleries/${decodeURIComponent(product.asset_folder)
                   .replace(/\s+/g, "-")
                   .toLowerCase()}`}
               >
