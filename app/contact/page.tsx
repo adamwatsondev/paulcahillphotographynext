@@ -233,7 +233,7 @@ export default function Home() {
               <CardContent className="flex flex-col pt-8 gap-8 justify-center">
                 <div className="text-center">
                   <span className="text-black font-old-standard md:text-3xl text-xl font-bold leading-tight">
-                    Interested in purchasing?
+                    Have an image specific question?
                   </span>
                   <span className="text-black font-old-standard md:text-xl text-lg font-medium leading-tight block mt-4">
                     Select the <strong>gallery</strong> and{" "}
