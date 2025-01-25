@@ -18,7 +18,7 @@ export function EmblaCarousel({ resources }: EmblaCarouselProps) {
     { loop: true, align: "start" },
     [
       AutoScroll({
-        speed: 3,
+        speed: 2,
         playOnInit: true,
         stopOnInteraction: false,
       }),

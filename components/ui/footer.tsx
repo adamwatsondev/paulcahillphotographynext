@@ -15,8 +15,8 @@ export default function Footer() {
               src="/images/Assets/mail.jpg"
               alt="Mail"
               quality={100}
-              width={20}
-              height={20}
+              width={60}
+              height={60}
             />
           </Link>
           <Link
@@ -28,8 +28,8 @@ export default function Footer() {
               src="/images/Assets/instagram-icon.png"
               alt="Instagram"
               quality={100}
-              width={20}
-              height={20}
+              width={60}
+              height={60}
             />
           </Link>
         </div>
