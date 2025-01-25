@@ -52,7 +52,10 @@ export default function Home() {
       message: "",
       gallery: "",
       image: "",
-      tab: new URLSearchParams(window.location.search).get("tab") || "general",
+      tab:
+        typeof window !== "undefined"
+          ? new URLSearchParams(window.location.search).get("tab") || "general"
+          : "general",
     },
   });
 
