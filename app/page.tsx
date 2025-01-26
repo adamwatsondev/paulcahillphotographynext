@@ -32,12 +32,6 @@ export default async function Home() {
     console.error("Failed to fetch resources from Cloudinary:", error);
   }
 
-  if (resources.length === 0) {
-    return <div>No images found in the Brighton folder.</div>;
-  }
-
-  console.log(resources);
-
   return (
     <div className="flex flex-col gap-8 md:gap-20 pb-20">
       <div className="fixed top-0 left-0 w-full z-10 bg-white shadow-md overflow-hidden">
