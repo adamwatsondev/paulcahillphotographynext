@@ -22,7 +22,7 @@ interface CloudinaryResource {
 async function fetchCloudinaryResources() {
   try {
     const thumbnailGalleriesResponse = await cloudinary.search
-      .expression("tags=Thumbnail")
+      .expression("tags=GalleryEntry")
       .execute();
     return thumbnailGalleriesResponse.resources || [];
   } catch (error) {
@@ -50,7 +50,7 @@ export default async function Galleries() {
         <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
           {resources.map((product: CloudinaryResource) => (
             <div key={product.public_id} className="flex flex-col gap-4">
-              <Link href={`/galleries/${product.asset_folder}`}>
+              <Link href={`/galleries/${product.asset_folder.toLowerCase()}`}>
                 <Image
                   className="w-full h-[250px] md:h-[450px] xl:h-[500px] object-fit"
                   src={product.secure_url}
