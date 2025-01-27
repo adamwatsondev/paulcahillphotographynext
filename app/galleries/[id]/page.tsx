@@ -7,6 +7,22 @@ import Lightbox from "react-spring-lightbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface CloudinaryResource {
   public_id: string;
@@ -14,6 +30,12 @@ interface CloudinaryResource {
   display_name: string;
   asset_folder: string;
 }
+
+const prices = {
+  a2: 150,
+  a3: 160,
+  a4: 170,
+};
 
 export default function GalleryPage() {
   const { id } = useParams();
@@ -23,6 +45,9 @@ export default function GalleryPage() {
   const [error, setError] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<CloudinaryResource | null>(
+    null
+  );
 
   useEffect(() => {
     if (!id || Array.isArray(id)) {
@@ -156,9 +181,81 @@ export default function GalleryPage() {
                 width={1000}
                 height={650}
               />
-              <span className="text-3xl font-old-standard text-center font-bold leading-tight text-black">
-                {product.display_name || "Untitled"}
-              </span>
+              <div className="flex justify-between items-center">
+                <span className="text-3xl font-old-standard text-left font-bold leading-tight text-black">
+                  {product.display_name || "Untitled"}
+                </span>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      className="text-white h-10 w-fit font-bold py-2 px-4 rounded-sm"
+                      onClick={() => setSelectedImage(product)}
+                    >
+                      <span className="font-old-standard text-lg font-semibold">
+                        Purchase
+                      </span>
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle className="sm:text-5xl text-xl text-center font-bold font-old-standard text-black mb-8">
+                        Size Selection
+                      </DialogTitle>
+                    </DialogHeader>
+                    <div className="flex flex-col gap-4">
+                      {selectedImage && (
+                        <Image
+                          src={selectedImage.secure_url}
+                          alt={selectedImage.public_id}
+                          width={600}
+                          height={400}
+                          className="rounded"
+                        />
+                      )}
+                      <Select>
+                        <SelectTrigger className="w-full border border-black">
+                          <SelectValue placeholder="Select a size" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="a2">
+                            <div className="flex gap-2 items-center">
+                              <span className="text-black">A2</span>
+                              <span className="text-md text-muted-foreground">
+                                (£{prices.a2}.00)
+                              </span>
+                            </div>
+                          </SelectItem>
+                          <SelectItem value="a3">
+                            <div className="flex gap-2 items-center">
+                              <span className="text-black">A3</span>
+                              <span className="text-md text-muted-foreground">
+                                (£{prices.a3}.00)
+                              </span>
+                            </div>
+                          </SelectItem>
+                          <SelectItem value="a4">
+                            <div className="flex gap-2 items-center">
+                              <span className="text-black">A4</span>
+                              <span className="text-md text-muted-foreground">
+                                (£{prices.a4}.00)
+                              </span>
+                            </div>
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <DialogFooter>
+                      <DialogClose className="text-black w-full bg-white focus:outline-none">
+                        <Button className="text-white h-12 w-full font-bold py-2 px-4 rounded-sm">
+                          <span className="font-old-standard text-lg font-semibold">
+                            Add to Basket
+                          </span>
+                        </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </div>
             </div>
           ))}
         </div>
