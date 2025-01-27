@@ -1,5 +1,3 @@
-import Footer from "@/components/ui/footer";
-import Header from "@/components/ui/header";
 import { Skeleton } from "@/components/ui/skeleton";
 import { v2 as cloudinary } from "cloudinary";
 import Link from "next/link";
@@ -25,13 +23,11 @@ export default async function Home() {
   let featuredGalleriesResults = [];
 
   try {
-    // Fetch resources for the Carousel
     const carouselResponse = await cloudinary.search
       .expression("tags=Carousel")
       .execute();
     carouselResults = carouselResponse.resources || [];
 
-    // Fetch resources for the Featured Galleries
     const featuredGalleriesResponse = await cloudinary.search
       .expression("tags=Featured")
       .execute();
@@ -42,9 +38,6 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-8 md:gap-20 pb-20">
-      <div className="fixed top-0 left-0 w-full z-10 bg-white shadow-md overflow-hidden">
-        <Header />
-      </div>
       <div className="grid grid-cols-3 gap-12 px-4 md:px-10 lg:px-20 pb-20 mt-40">
         {/* Carousel */}
         <div className="col-span-3 relative md:h-[600px] mx-auto">
@@ -86,10 +79,6 @@ export default async function Home() {
             ))}
           </div>
         </div>
-      </div>
-      {/* Footer */}
-      <div className="fixed bottom-0 left-0 w-full h-12 bg-white shadow-md flex items-center justify-center">
-        <Footer />
       </div>
     </div>
   );
