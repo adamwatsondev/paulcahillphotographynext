@@ -17,6 +17,7 @@ interface CloudinaryResource {
 
 export default function GalleryPage() {
   const { id } = useParams();
+  const formattedId = Array.isArray(id) ? id[0] : id;
   const [resources, setResources] = useState<CloudinaryResource[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,14 +31,9 @@ export default function GalleryPage() {
       return;
     }
 
-    // Decode the URL-encoded folder name and handle spaces
-    const formattedFolderName = encodeURIComponent(id.replace(/-/g, " "));
-
     async function fetchResources() {
       try {
-        const response = await fetch(
-          `/api/cloudinary?folder=${formattedFolderName}`
-        );
+        const response = await fetch(`/api/cloudinary?folder=${id}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -124,7 +120,7 @@ export default function GalleryPage() {
 
       <div className="flex flex-col px-4 md:px-10 lg:px-20 pb-20 mt-40">
         <span className="text-5xl capitalize font-bold text-center font-old-standard text-black mb-8">
-          {id}
+          {formattedId?.replace(/-/g, " ")}
         </span>
 
         {/* Galleries Grid */}

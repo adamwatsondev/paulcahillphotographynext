@@ -50,11 +50,7 @@ export default async function Galleries() {
         <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
           {resources.map((product: CloudinaryResource) => (
             <div key={product.public_id} className="flex flex-col gap-4">
-              <Link
-                href={`/galleries/${decodeURIComponent(product.asset_folder)
-                  .replace(/\s+/g, "-")
-                  .toLowerCase()}`}
-              >
+              <Link href={`/galleries/${product.asset_folder}`}>
                 <Image
                   className="w-full h-[250px] md:h-[450px] xl:h-[500px] object-fit"
                   src={product.secure_url}
@@ -67,8 +63,8 @@ export default async function Galleries() {
                 />
               </Link>
               {product.public_id ? (
-                <span className="text-3xl font-old-standard text-center font-bold leading-tight text-black">
-                  {product.asset_folder}
+                <span className="text-3xl capitalize font-old-standard text-center font-bold leading-tight text-black">
+                  {product.asset_folder.replace(/-/g, " ")}
                 </span>
               ) : (
                 <Skeleton className="h-6 w-3/4 bg-gray-200 rounded" />
