@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Footer from "@/components/ui/footer";
-import Header from "@/components/ui/header";
 import Image from "next/image";
 import Lightbox from "react-spring-lightbox";
-import { RotatingLines } from "react-loader-spinner";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface CloudinaryResource {
   public_id: string;
@@ -91,18 +91,43 @@ export default function GalleryPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <RotatingLines width="80" ariaLabel="loading" strokeColor="gray" />
+      <div className="flex flex-col gap-8 md:gap-20 pb-20">
+        <div className="flex flex-col gap-8 px-4 md:px-10 lg:px-20 pb-20 mt-40">
+          <div className="flex justify-center items-center">
+            <Skeleton className="h-12 w-3/4 bg-gray-200 rounded" />
+          </div>
+
+          {/* Galleries Grid */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
+            {Array.from({ length: 20 }).map((_, index) => (
+              <div key={index} className="flex flex-col gap-4">
+                <Skeleton className="w-full h-[250px] md:h-[450px] xl:h-[500px] hover:cursor-pointer object-fill" />
+                <Skeleton className="h-6 w-3/4 bg-gray-200 rounded" />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
 
   if (error) {
-    return <div className="text-center text-red-500">{error}</div>;
-  }
-
-  if (!resources.length) {
-    return <div>No images found for the folder `{id}`.</div>;
+    return (
+      <div className="flex flex-col gap-8 md:gap-20 pb-20">
+        <div className="flex flex-col gap-8 px-4 md:px-10 items-center justify-center lg:px-20 pb-20 mt-40">
+          <span className="text-5xl font-bold text-center font-old-standard text-black mb-8">
+            No images found for the folder {formattedId}
+          </span>
+          <Link href="/galleries">
+            <Button className="text-white h-12 w-40 font-bold py-2 px-4 rounded-sm">
+              <span className="font-old-standard text-lg">
+                Back to Galleries
+              </span>
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -113,11 +138,6 @@ export default function GalleryPage() {
           : "flex flex-col gap-8 md:gap-20 pb-20"
       }
     >
-      {/* Header */}
-      <div className="fixed top-0 left-0 w-full z-10 bg-white shadow-md h-16">
-        <Header />
-      </div>
-
       <div className="flex flex-col px-4 md:px-10 lg:px-20 pb-20 mt-40">
         <span className="text-5xl capitalize font-bold text-center font-old-standard text-black mb-8">
           {formattedId?.replace(/-/g, " ")}
@@ -135,8 +155,6 @@ export default function GalleryPage() {
                 quality={100}
                 width={1000}
                 height={650}
-                placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
               />
               <span className="text-3xl font-old-standard text-center font-bold leading-tight text-black">
                 {product.display_name || "Untitled"}
@@ -201,11 +219,6 @@ export default function GalleryPage() {
         }
         images={imagesForLightbox}
       />
-
-      {/* Footer */}
-      <div className="fixed bottom-0 left-0 w-full h-12 bg-white shadow-md flex items-center justify-center">
-        <Footer />
-      </div>
     </div>
   );
 }

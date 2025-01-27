@@ -27,7 +27,7 @@ export function EmblaCarousel({ resources }: EmblaCarouselProps) {
 
   useEffect(() => {
     if (emblaApi) {
-      console.log(emblaApi.slideNodes()); // Access API
+      console.log(emblaApi.slideNodes());
     }
   }, [emblaApi]);
 

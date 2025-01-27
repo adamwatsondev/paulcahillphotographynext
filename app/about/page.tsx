@@ -1,5 +1,3 @@
-import Footer from "@/components/ui/footer";
-import Header from "@/components/ui/header";
 import { Button } from "@/components/ui/nav-button";
 import Link from "next/link";
 import Image from "next/image";
@@ -40,11 +38,6 @@ export default async function About() {
 
   return (
     <div className="flex pb-20">
-      {/* Fixed Header */}
-      <div className="fixed top-0 left-0 w-full z-10 bg-white shadow-md h-16">
-        <Header />
-      </div>
-
       <div className="grid grid-cols-2 gap-12 2xl:gap-20 items-center justify-center mx-4 xl:mx-40 sm:mx-20 mt-40 xl:mt-60">
         <div className="xl:col-span-1 col-span-2 relative w-full aspect-[3/2]">
           {profileImage && (
@@ -55,8 +48,6 @@ export default async function About() {
               quality={100}
               width={1000}
               height={650}
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
             />
           )}
         </div>
@@ -67,7 +58,7 @@ export default async function About() {
           <span className="text-black font-old-standard md:text-2xl text-xl font-medium leading-tight">
             {profileImage?.context?.alt || "No alt available"}
           </span>
-          <Link href="/contact?tab=general">
+          <Link href="/contact">
             <Button className="text-white h-12 w-40 font-bold py-2 px-4 rounded-sm">
               <span className="font-old-standard text-xl font-semibold">
                 Get in touch
@@ -75,11 +66,6 @@ export default async function About() {
             </Button>
           </Link>
         </div>
-      </div>
-
-      {/* Footer */}
-      <div className="fixed bottom-0 left-0 w-full h-12 bg-white shadow-md flex items-center justify-center">
-        <Footer />
       </div>
     </div>
   );

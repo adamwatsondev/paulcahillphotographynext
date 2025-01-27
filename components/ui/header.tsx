@@ -31,7 +31,6 @@ export default function Header() {
           className="text-black bg-white focus:outline-none"
         >
           {isMenuOpen ? (
-            // Close Icon
             <svg
               className="w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +46,6 @@ export default function Header() {
               />
             </svg>
           ) : (
-            // Hamburger Icon
             <svg
               className="w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +86,7 @@ export default function Header() {
                 Galleries
               </Link>
               <Link
-                href="/contact?tab=general"
+                href="/contact"
                 className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
               >
                 Contact
@@ -119,7 +117,7 @@ export default function Header() {
           Galleries
         </Link>
         <Link
-          href="/contact?tab=general"
+          href="/contact"
           className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400 text-2xl"
         >
           Contact
