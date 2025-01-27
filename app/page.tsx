@@ -21,13 +21,21 @@ interface CloudinaryResource {
 }
 
 export default async function Home() {
-  let resources = [];
+  let carouselResults = [];
+  let featuredGalleriesResults = [];
 
   try {
+    // Fetch resources for the Carousel
+    const carouselResponse = await cloudinary.search
+      .expression("tags=Carousel")
+      .execute();
+    carouselResults = carouselResponse.resources || [];
+
+    // Fetch resources for the Featured Galleries
     const featuredGalleriesResponse = await cloudinary.search
       .expression("tags=Featured")
       .execute();
-    resources = featuredGalleriesResponse.resources || [];
+    featuredGalleriesResults = featuredGalleriesResponse.resources || [];
   } catch (error) {
     console.error("Failed to fetch resources from Cloudinary:", error);
   }
@@ -40,7 +48,7 @@ export default async function Home() {
       <div className="grid grid-cols-3 gap-12 px-4 md:px-10 lg:px-20 pb-20 mt-40">
         {/* Carousel */}
         <div className="col-span-3 relative md:h-[600px] mx-auto">
-          <EmblaCarousel resources={resources} />
+          <EmblaCarousel resources={carouselResults} />
         </div>
 
         {/* Featured Galleries */}
@@ -50,7 +58,7 @@ export default async function Home() {
           </span>
 
           <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
-            {resources.map((product: CloudinaryResource) => (
+            {featuredGalleriesResults.map((product: CloudinaryResource) => (
               <div key={product.public_id} className="flex flex-col gap-4">
                 <Link
                   href={`/galleries/${product.asset_folder
@@ -66,7 +74,6 @@ export default async function Home() {
                     height={650}
                   />
                 </Link>
-                {/* </Link> */}
                 {/* Conditional rendering of Title */}
                 {product.public_id ? (
                   <span className="text-3xl capitalize font-old-standard text-center font-bold leading-tight text-black">

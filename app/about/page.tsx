@@ -62,10 +62,10 @@ export default async function About() {
         </div>
         <div className="xl:col-span-1 col-span-2 flex flex-col gap-8">
           <span className="text-black font-old-standard md:text-5xl text-2xl font-bold leading-tight">
-            {profileImage?.context?.alt || "No alt available"}
+            {profileImage?.context?.caption || "No caption available"}
           </span>
           <span className="text-black font-old-standard md:text-2xl text-xl font-medium leading-tight">
-            {profileImage?.context?.caption || "No caption available"}
+            {profileImage?.context?.alt || "No alt available"}
           </span>
           <Link href="/contact?tab=general">
             <Button className="text-white h-12 w-40 font-bold py-2 px-4 rounded-sm">
