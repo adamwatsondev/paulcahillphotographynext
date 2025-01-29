@@ -23,6 +23,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useBasket } from "@/app/context/basket-context";
+import { toast, Toaster } from "sonner";
 
 interface CloudinaryResource {
   public_id: string;
@@ -32,9 +34,9 @@ interface CloudinaryResource {
 }
 
 const prices = {
-  a2: 150,
-  a3: 160,
-  a4: 170,
+  A2: 150,
+  A3: 160,
+  A4: 170,
 };
 
 export default function GalleryPage() {
@@ -48,6 +50,27 @@ export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<CloudinaryResource | null>(
     null
   );
+  const { addItem } = useBasket();
+  const [selectedSize, setSelectedSize] = useState<keyof typeof prices | null>(
+    null
+  );
+
+  const handleAddToBasket = (resource: CloudinaryResource) => {
+    if (selectedSize) {
+      const price = prices[selectedSize];
+      addItem({
+        id: resource.public_id,
+        size: selectedSize,
+        price,
+        imageUrl: resource.secure_url,
+        asset_folder: resource.asset_folder,
+        display_name: resource.display_name,
+      });
+      toast.success("Item added to basket!");
+    } else {
+      toast.error("No size selected");
+    }
+  };
 
   useEffect(() => {
     if (!id || Array.isArray(id)) {
@@ -165,7 +188,7 @@ export default function GalleryPage() {
     >
       <div className="flex flex-col px-4 md:px-10 lg:px-20 pb-20 mt-40">
         <span className="text-5xl capitalize font-bold text-center font-old-standard text-black mb-8">
-          {formattedId?.replace(/-/g, " ")}
+          {formattedId?.replace(/-/g, " ").replace("and", "&")}
         </span>
 
         {/* Galleries Grid */}
@@ -212,32 +235,36 @@ export default function GalleryPage() {
                           className="rounded"
                         />
                       )}
-                      <Select>
+                      <Select
+                        onValueChange={(value) =>
+                          setSelectedSize(value as keyof typeof prices)
+                        }
+                      >
                         <SelectTrigger className="w-full border border-black">
                           <SelectValue placeholder="Select a size" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="a2">
+                          <SelectItem value="A2">
                             <div className="flex gap-2 items-center">
                               <span className="text-black">A2</span>
                               <span className="text-md text-muted-foreground">
-                                (£{prices.a2}.00)
+                                (£{prices.A2}.00)
                               </span>
                             </div>
                           </SelectItem>
-                          <SelectItem value="a3">
+                          <SelectItem value="A3">
                             <div className="flex gap-2 items-center">
                               <span className="text-black">A3</span>
                               <span className="text-md text-muted-foreground">
-                                (£{prices.a3}.00)
+                                (£{prices.A3}.00)
                               </span>
                             </div>
                           </SelectItem>
-                          <SelectItem value="a4">
+                          <SelectItem value="A4">
                             <div className="flex gap-2 items-center">
                               <span className="text-black">A4</span>
                               <span className="text-md text-muted-foreground">
-                                (£{prices.a4}.00)
+                                (£{prices.A4}.00)
                               </span>
                             </div>
                           </SelectItem>
@@ -246,7 +273,11 @@ export default function GalleryPage() {
                     </div>
                     <DialogFooter>
                       <DialogClose className="text-black w-full bg-white focus:outline-none">
-                        <Button className="text-white h-12 w-full font-bold py-2 px-4 rounded-sm">
+                        <Button
+                          disabled={!selectedSize}
+                          onClick={() => handleAddToBasket(selectedImage!)}
+                          className="text-white h-12 w-full font-bold py-2 px-4 rounded-sm"
+                        >
                           <span className="font-old-standard text-lg font-semibold">
                             Add to Basket
                           </span>
@@ -316,6 +347,8 @@ export default function GalleryPage() {
         }
         images={imagesForLightbox}
       />
+
+      <Toaster position="bottom-right" />
     </div>
   );
 }
