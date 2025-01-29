@@ -1,12 +1,30 @@
 "use client";
 
-import { Button } from "@/components/ui/nav-button";
-import Image from "next/image";
-import Link from "next/link";
 import { useBasket } from "../context/basket-context";
+import React, { useState } from "react";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+const initialOptions = {
+  clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "",
+  "enable-funding": "venmo",
+  "disable-funding": "",
+  "buyer-country": "GB",
+  currency: "GBP",
+  "data-page-type": "product-details",
+  components: "buttons",
+  "data-sdk-integration-source": "developer-studio",
+};
+
+function Message({ content }: { content: string }) {
+  return <p>{content}</p>;
+}
 
 export default function Checkout() {
   const { items, total, clearBasket, removeItem } = useBasket();
+  const [message, setMessage] = useState("");
 
   return (
     <div className="flex flex-col gap-8 md:gap-20 pb-20 mt-40">
@@ -62,28 +80,116 @@ export default function Checkout() {
                         </span>
                       </div>
                     </div>
-                    <Button
-                      className="text-white bg-destructive h-8 w-16 font-bold mr-4 py-2 px-4 rounded-sm"
-                      onClick={() => removeItem(item.id)}
-                      disabled={items.length === 1}
-                    >
-                      Remove
-                    </Button>
+                    <div className="flex justify-end">
+                      <Button
+                        className="text-white bg-destructive h-8 w-16 font-bold mr-4 py-2 px-4 rounded-sm"
+                        onClick={() => removeItem(item.id)}
+                      >
+                        Remove
+                      </Button>
+                    </div>
                   </div>
                 ))}
               </div>
               <span className="text-xl font-bold text-end font-old-standard text-black">
                 Total: £{total}
               </span>
-              <Button onClick={clearBasket}>Clear Basket</Button>
+              <Button
+                className="text-white bg-destructive h-12 w-full font-bold py-2 px-4 rounded-sm"
+                onClick={clearBasket}
+              >
+                Clear Basket
+              </Button>
             </>
           )}
         </div>
         {items.length > 0 && (
           <div className="xl:col-span-1 col-span-2 flex flex-col gap-4">
-            <span className="text-xl font-bold text-start font-old-standard text-black">
-              Checkout with PayPal
-            </span>
+            <div className="App">
+              <PayPalScriptProvider options={initialOptions}>
+                <PayPalButtons
+                  disabled={true}
+                  style={{
+                    shape: "rect",
+                    layout: "vertical",
+                    color: "gold",
+                    label: "paypal",
+                  }}
+                  createOrder={async () => {
+                    try {
+                      const response = await fetch("/api/orders", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          cart: items,
+                        }),
+                      });
+
+                      const orderData = await response.json();
+
+                      if (orderData.id) {
+                        return orderData.id;
+                      } else {
+                        const errorDetail = orderData?.details?.[0];
+                        const errorMessage = errorDetail
+                          ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+                          : JSON.stringify(orderData);
+
+                        throw new Error(errorMessage);
+                      }
+                    } catch (error) {
+                      console.error(error);
+                      setMessage(
+                        `Could not initiate PayPal Checkout...${error}`
+                      );
+                    }
+                  }}
+                  onApprove={async (data, actions) => {
+                    try {
+                      const response = await fetch(
+                        `/api/orders/${data.orderID}/capture`,
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                        }
+                      );
+
+                      const orderData = await response.json();
+                      const errorDetail = orderData?.details?.[0];
+
+                      if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
+                        return actions.restart();
+                      } else if (errorDetail) {
+                        throw new Error(
+                          `${errorDetail.description} (${orderData.debug_id})`
+                        );
+                      } else {
+                        const transaction =
+                          orderData.purchase_units[0].payments.captures[0];
+                        setMessage(
+                          `Transaction ${transaction.status}: ${transaction.id}. See console for all available details`
+                        );
+                        console.log(
+                          "Capture result",
+                          orderData,
+                          JSON.stringify(orderData, null, 2)
+                        );
+                      }
+                    } catch (error) {
+                      console.error(error);
+                      setMessage(
+                        `Sorry, your transaction could not be processed...${error}`
+                      );
+                    }
+                  }}
+                />
+              </PayPalScriptProvider>
+              <Message content={message} />
+            </div>
           </div>
         )}
       </div>
