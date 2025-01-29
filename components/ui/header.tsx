@@ -2,12 +2,19 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import BasketDrawer from "./basket-drawer";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
   };
 
   return (
@@ -24,7 +31,6 @@ export default function Header() {
         </div>
       </Link>
 
-      {/* Hamburger Icon for mobile */}
       <div className="sm:hidden flex w-full justify-center items-center relative">
         <button
           onClick={toggleMenu}
@@ -63,10 +69,10 @@ export default function Header() {
           )}
         </button>
 
-        {/* Mobile Menu */}
+        {/* Navigation Menu (mobile) */}
         {isMenuOpen && (
           <div className="absolute top-full left-0 w-full bg-white shadow-md z-10">
-            <nav className="flex justify-between items-center px-20 py-4 gap-1">
+            <nav className="flex justify-between items-end px-20 py-4 gap-1">
               <Link
                 href="/"
                 className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
@@ -91,13 +97,21 @@ export default function Header() {
               >
                 Contact
               </Link>
+              <Image
+                src="/images/Assets/basket.jpg"
+                alt="Basket"
+                width={80}
+                height={80}
+                className="hover:cursor-pointer w-16"
+                onClick={toggleDrawer}
+              />
             </nav>
           </div>
         )}
       </div>
 
       {/* Navigation Menu (desktop) */}
-      <nav className="sm:flex items-center space-x-16 hidden">
+      <nav className="sm:flex items-end space-x-16 hidden">
         <Link
           href="/"
           className="text-black hover:underline hover:underline-offset-4 font-old-standard font-bold hover:text-gray-400 text-2xl"
@@ -122,7 +136,18 @@ export default function Header() {
         >
           Contact
         </Link>
+        <Image
+          src="/images/Assets/basket.jpg"
+          alt="Basket"
+          width={75}
+          height={75}
+          className="hover:cursor-pointer"
+          onClick={toggleDrawer}
+        />
       </nav>
+
+      {/* Drawer */}
+      <BasketDrawer isOpen={isDrawerOpen} onToggle={toggleDrawer} />
     </div>
   );
 }

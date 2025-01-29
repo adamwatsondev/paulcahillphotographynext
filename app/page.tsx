@@ -70,7 +70,9 @@ export default async function Home() {
                 {/* Conditional rendering of Title */}
                 {product.public_id ? (
                   <span className="text-3xl capitalize font-old-standard text-center font-bold leading-tight text-black">
-                    {product.asset_folder.replace(/-/g, " ")}
+                    {product.asset_folder
+                      .replace(/-/g, " ")
+                      .replace("and", "&")}
                   </span>
                 ) : (
                   <Skeleton className="h-6 w-3/4 bg-gray-200 rounded" />
