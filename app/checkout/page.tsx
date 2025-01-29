@@ -80,11 +80,7 @@ export default function Checkout() {
           )}
         </div>
         {items.length > 0 && (
-          <div className="xl:col-span-1 col-span-2 flex flex-col gap-4">
-            <span className="text-xl font-bold text-start font-old-standard text-black">
-              Checkout with PayPal
-            </span>
-          </div>
+          <div className="xl:col-span-1 items-center justify-center col-span-2 flex flex-col gap-4"></div>
         )}
       </div>
     </div>
