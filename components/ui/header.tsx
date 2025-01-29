@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import BasketDrawer from "./basket-drawer";
 
 export default function Header() {
@@ -97,14 +96,12 @@ export default function Header() {
               >
                 Contact
               </Link>
-              <Image
-                src="/images/Assets/basket.jpg"
-                alt="Basket"
-                width={80}
-                height={80}
-                className="hover:cursor-pointer w-16"
+              <span
                 onClick={toggleDrawer}
-              />
+                className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400 text-2xl"
+              >
+                Basket
+              </span>
             </nav>
           </div>
         )}
@@ -136,14 +133,12 @@ export default function Header() {
         >
           Contact
         </Link>
-        <Image
-          src="/images/Assets/basket.jpg"
-          alt="Basket"
-          width={75}
-          height={75}
-          className="hover:cursor-pointer"
+        <span
           onClick={toggleDrawer}
-        />
+          className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400 text-2xl"
+        >
+          Basket
+        </span>
       </nav>
 
       {/* Drawer */}
