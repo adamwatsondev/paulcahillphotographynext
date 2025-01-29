@@ -71,34 +71,38 @@ export default function Header() {
         {/* Navigation Menu (mobile) */}
         {isMenuOpen && (
           <div className="absolute top-full left-0 w-full bg-white shadow-md z-10">
-            <nav className="flex justify-between items-end px-20 py-4 gap-1">
+            <nav className="flex justify-between items-end px-8 py-4 gap-1">
               <Link
                 href="/"
                 className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
               >
                 Home
               </Link>
+              |
               <Link
                 href="/about"
                 className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
               >
                 About
               </Link>
+              |
               <Link
                 href="/galleries"
                 className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
               >
                 Galleries
               </Link>
+              |
               <Link
                 href="/contact"
                 className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
               >
                 Contact
               </Link>
+              |
               <span
                 onClick={toggleDrawer}
-                className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400 text-2xl"
+                className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
               >
                 Basket
               </span>
