@@ -20,7 +20,9 @@ export default function Footer() {
             />
           </Link>
           <Link
+            // edit this so it opens in a new tab
             href="https://www.instagram.com/cahill_paul/?hl=en"
+            target="_blank"
             className="text-black bg-white focus:outline-none"
           >
             <Image
@@ -34,6 +36,7 @@ export default function Footer() {
           </Link>
           <Link
             href="https://www.facebook.com/AnnieSheaFaye"
+            target="_blank"
             className="text-black bg-white focus:outline-none"
           >
             <Image
@@ -47,6 +50,7 @@ export default function Footer() {
           </Link>
           <Link
             href="https://www.flickr.com/photos/bochtan/"
+            target="_blank"
             className="text-black bg-white focus:outline-none"
           >
             <Image
