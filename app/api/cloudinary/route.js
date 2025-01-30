@@ -14,7 +14,13 @@ export async function GET(request) {
   if (!folder) {
     return new Response(JSON.stringify({ error: "Folder name is required" }), {
       status: 400,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
     });
   }
 
@@ -27,7 +33,13 @@ export async function GET(request) {
       JSON.stringify({ resources: response.resources || [] }),
       {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control":
+            "no-store, no-cache, must-revalidate, proxy-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
       }
     );
   } catch (error) {
@@ -36,7 +48,13 @@ export async function GET(request) {
       JSON.stringify({ error: "Failed to fetch resources" }),
       {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control":
+            "no-store, no-cache, must-revalidate, proxy-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
       }
     );
   }
