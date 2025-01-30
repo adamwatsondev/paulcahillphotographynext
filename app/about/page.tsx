@@ -25,12 +25,15 @@ async function fetchCloudinaryResources(): Promise<CloudinaryResource[]> {
       .expression("tags=ProfilePhoto")
       .with_field("context")
       .execute();
+
     return profilePhotoResponse.resources || [];
   } catch (error) {
     console.error("Failed to fetch resources from Cloudinary:", error);
     return [];
   }
 }
+
+export const revalidate = 0;
 
 export default async function About() {
   const resources = await fetchCloudinaryResources();

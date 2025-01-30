@@ -32,6 +32,32 @@ export default function Footer() {
               height={60}
             />
           </Link>
+          <Link
+            href="https://www.facebook.com/AnnieSheaFaye"
+            className="text-black bg-white focus:outline-none"
+          >
+            <Image
+              className="h-9 w-9"
+              src="/images/Assets/facebook-icon.jpg"
+              alt="Instagram"
+              quality={100}
+              width={60}
+              height={60}
+            />
+          </Link>
+          <Link
+            href="https://www.flickr.com/photos/bochtan/"
+            className="text-black bg-white focus:outline-none"
+          >
+            <Image
+              className="h-7 w-20"
+              src="/images/Assets/flickr-icon.png"
+              alt="Instagram"
+              quality={100}
+              width={60}
+              height={60}
+            />
+          </Link>
         </div>
       </div>
     </>

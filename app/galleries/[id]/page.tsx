@@ -34,9 +34,9 @@ interface CloudinaryResource {
 }
 
 const prices = {
-  A2: 150,
-  A3: 160,
-  A4: 170,
+  A2: 135,
+  A3: 105,
+  A4: 75,
 };
 
 export default function GalleryPage() {
@@ -235,6 +235,26 @@ export default function GalleryPage() {
                           className="rounded"
                         />
                       )}
+                      <div className="flex flex-col gap-1">
+                        <span className="text-sm font-old-standard text-left italic font-medium leading-tight text-black">
+                          All prices are for prints only.
+                        </span>
+                        <span className="text-sm font-old-standard text-left italic font-medium leading-tight text-black">
+                          All orders are printed on hahnemühle fine art
+                          photography paper.
+                        </span>{" "}
+                        <span className="text-sm font-old-standard text-left italic font-medium leading-tight text-black">
+                          If you are interested in mounted or framed images,
+                          please{" "}
+                          <Link
+                            className="underline hover:cursor-pointer"
+                            href="/contact"
+                          >
+                            contact me for a quote
+                          </Link>
+                          .
+                        </span>
+                      </div>
                       <Select
                         onValueChange={(value) =>
                           setSelectedSize(value as keyof typeof prices)

@@ -76,6 +76,25 @@ export default function Checkout() {
                 Total: £{total}
               </span>
               <Button onClick={clearBasket}>Clear Basket</Button>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-old-standard text-left italic font-medium leading-tight text-black">
+                  All prices are for prints only.
+                </span>
+                <span className="text-sm font-old-standard text-left italic font-medium leading-tight text-black">
+                  All orders are printed on hahnemühle fine art photography
+                  paper.
+                </span>{" "}
+                <span className="text-sm font-old-standard text-left italic font-medium leading-tight text-black">
+                  If you are interested in mounted or framed images, please{" "}
+                  <Link
+                    className="underline hover:cursor-pointer"
+                    href="/contact"
+                  >
+                    contact me for a quote
+                  </Link>
+                  .
+                </span>
+              </div>
             </>
           )}
         </div>
