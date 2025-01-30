@@ -69,50 +69,50 @@ export default function Header() {
         </button>
 
         {/* Navigation Menu (mobile) */}
-        {isMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white shadow-md z-10">
-            <nav className="flex justify-between items-end px-8 py-4 gap-1">
-              <Link
-                href="/"
-                className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
-              >
-                Home
-              </Link>
-              |
-              <Link
-                href="/about"
-                className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
-              >
-                About
-              </Link>
-              |
-              <Link
-                href="/galleries"
-                className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
-              >
-                Galleries
-              </Link>
-              |
-              <Link
-                href="/contact"
-                className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
-              >
-                Contact
-              </Link>
-              |
-              <span
-                onClick={toggleDrawer}
-                className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
-              >
-                Basket
-              </span>
-            </nav>
-          </div>
-        )}
+        <div
+          className={`absolute top-full left-0 w-full z-10 overflow-hidden flex justify-center transition-all duration-500 ease-in-out ${
+            isMenuOpen
+              ? "max-h-[100px] opacity-100 translate-y-0"
+              : "max-h-0 opacity-0 -translate-y-5"
+          }`}
+        >
+          <nav className="flex items-center px-4 py-4 gap-3">
+            <Link
+              href="/"
+              className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
+            >
+              About
+            </Link>
+            <Link
+              href="/galleries"
+              className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
+            >
+              Galleries
+            </Link>
+            <Link
+              href="/contact"
+              className="text-black font-old-standard hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
+            >
+              Contact
+            </Link>
+            <span
+              onClick={toggleDrawer}
+              className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
+            >
+              Basket
+            </span>
+          </nav>
+        </div>
       </div>
 
       {/* Navigation Menu (desktop) */}
-      <nav className="sm:flex items-end space-x-16 hidden">
+      <nav className="sm:flex items-end space-x-8 xl:space-x-16 hidden">
         <Link
           href="/"
           className="text-black hover:underline hover:underline-offset-4 font-old-standard font-bold hover:text-gray-400 text-2xl"

@@ -47,7 +47,7 @@ export default async function Galleries() {
             <div key={product.public_id} className="flex flex-col gap-4">
               <Link href={`/galleries/${product.asset_folder.toLowerCase()}`}>
                 <Image
-                  className="w-full h-[250px] md:h-[400px] object-fit"
+                  className="w-full h-[250px] md:h-[500px] object-fit"
                   src={product.secure_url}
                   alt={product.public_id}
                   quality={100}

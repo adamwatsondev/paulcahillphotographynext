@@ -75,19 +75,35 @@ html {
   }
 }
 
-.embla {
+.embla_desktop {
   overflow: hidden;
   display: flex;
   width: 100%;
 }
 
-.embla__container {
+.embla_desktop__container {
   display: flex;
 }
 
-.embla__slide {
+.embla_desktop__slide {
   flex: 0 0 content;
   padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.embla_mobile {
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+}
+
+.embla_mobile__container {
+  display: flex;
+}
+
+.embla_mobile__slide {
+  flex: 0 0 100%;
+  padding: 0 5px;
   box-sizing: border-box;
 }
 
