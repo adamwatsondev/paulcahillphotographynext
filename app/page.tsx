@@ -18,6 +18,8 @@ interface CloudinaryResource {
   asset_folder: string;
 }
 
+export const revalidate = 0;
+
 export default async function Home() {
   let carouselResults = [];
   let featuredGalleriesResults = [];

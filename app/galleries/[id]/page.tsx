@@ -39,6 +39,8 @@ const prices = {
   A4: 75,
 };
 
+export const revalidate = 0;
+
 export default function GalleryPage() {
   const { id } = useParams();
   const formattedId = Array.isArray(id) ? id[0] : id;

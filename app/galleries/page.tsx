@@ -29,6 +29,8 @@ async function fetchCloudinaryResources() {
   }
 }
 
+export const revalidate = 0;
+
 export default async function Galleries() {
   const resources = await fetchCloudinaryResources();
 
