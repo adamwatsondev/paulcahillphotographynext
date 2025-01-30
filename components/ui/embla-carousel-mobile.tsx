@@ -13,7 +13,7 @@ interface EmblaCarouselProps {
   }>;
 }
 
-export function EmblaCarousel({ resources }: EmblaCarouselProps) {
+export function EmblaCarouselMobile({ resources }: EmblaCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: "start" },
     [
@@ -32,15 +32,15 @@ export function EmblaCarousel({ resources }: EmblaCarouselProps) {
   }, [emblaApi]);
 
   return (
-    <div className="embla" ref={emblaRef}>
-      <div className="embla__container">
+    <div className="embla_mobile" ref={emblaRef}>
+      <div className="embla_mobile__container">
         {resources.map((resource) => (
           <div
-            className="embla__slide xl:h-[600px] md:h-[800px] w-full"
+            className="embla_mobile__slide xl:h-[600px] md:h-[800px] w-full"
             key={resource.public_id}
           >
             <Image
-              className="w-full max-h-[600px] h-[150px] md:h-[400px] xl:h-[650px] object-fill"
+              className="w-full max-h-[600px] h-[250px] md:h-[400px] xl:h-[650px] object-fill"
               src={resource.secure_url}
               alt={resource.public_id}
               quality={100}

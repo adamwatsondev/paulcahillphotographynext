@@ -149,8 +149,11 @@ export default function GalleryPage() {
           <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
             {Array.from({ length: 20 }).map((_, index) => (
               <div key={index} className="flex flex-col gap-4">
-                <Skeleton className="w-full h-[250px] md:h-[400px] hover:cursor-pointer object-fill" />
-                <Skeleton className="h-6 w-3/4 bg-gray-200 rounded" />
+                <Skeleton className="w-full h-[250px] rounded-none bg-gray-300 md:h-[500px] object-fill" />
+                <div className="flex justify-between">
+                  <Skeleton className="h-10 w-12 bg-gray-300 rounded" />
+                  <Skeleton className="h-10 w-28 bg-gray-300 rounded" />
+                </div>
               </div>
             ))}
           </div>
@@ -196,7 +199,7 @@ export default function GalleryPage() {
           {resources.map((product: CloudinaryResource, index: number) => (
             <div key={product.public_id} className="flex flex-col gap-4">
               <Image
-                className="w-full h-[250px] md:h-[400px] hover:cursor-pointer object-fill"
+                className="w-full h-[250px] md:h-[500px] hover:cursor-pointer object-fill"
                 src={product.secure_url}
                 alt={product.public_id}
                 onClick={() => openLightbox(index)}

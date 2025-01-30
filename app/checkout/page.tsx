@@ -47,12 +47,13 @@ export default function Checkout() {
                         height={150}
                       />
                       <div className="flex flex-col justify-center items-start">
-                        <span className="text-sm font-medium text-end font-old-standard text-black">
+                        <span className="text-sm font-medium text-start line-clamp-1 font-old-standard text-black">
                           {item.asset_folder
                             .replace(/-/g, " ")
-                            .replace("and", "&")
-                            .replace("and", "&")}{" "}
-                          - {item.display_name}
+                            .replace("and", "&")}
+                        </span>
+                        <span className="text-sm font-medium text-start font-old-standard text-black">
+                          {item.display_name}
                         </span>
                         <span className="text-sm font-medium text-end font-old-standard text-black">
                           Size: {item.size}
