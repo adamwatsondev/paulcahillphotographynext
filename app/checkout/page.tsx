@@ -75,7 +75,7 @@ export default function Checkout() {
 
   if (loading) {
     return (
-      <div className="flex flex-col gap-8 md:gap-20 pb-20 mt-40">
+      <div className="flex flex-col gap-8 md:gap-20 pb-20 mt-28 sm:mt-40">
         <div className="flex justify-center items-center">
           <Skeleton className="h-12 w-1/2 bg-gray-200 rounded" />
         </div>
