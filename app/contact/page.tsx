@@ -23,9 +23,6 @@ const schema = z.object({
   surname: z.string().regex(/^[a-zA-Z-]+$/, "Only letters and hyphen allowed."),
   email: z.string().email("Please enter a valid email."),
   message: z.string().min(10, "Message must be at least 10 characters."),
-  gallery: z.string().optional(),
-  image: z.string().min(1, "Please enter a valid image number.").optional(),
-  tab: z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -38,23 +35,18 @@ export default function Home() {
       surname: "",
       email: "",
       message: "",
-      gallery: "",
-      image: "",
     },
   });
 
   const onSubmit = (data: FormData) => {
     emailjs
       .send(
-        "service_j47mjsh",
+        "service_d1rfy3c",
         "template_tv7vbrs",
         {
           from_name: data.name,
           from_email: data.email,
           message: data.message,
-
-          gallery: data.gallery,
-          image: data.image,
         },
         "Tk-zw7Tnb0BfGcXW1"
       )
@@ -71,7 +63,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-8 md:gap-20 pb-20">
-      <div className="flex flex-col px-4 md:px-10 lg:px-20 items-center pb-20 mt-60">
+      <div className="flex flex-col px-4 md:px-10 lg:px-20 items-center pb-20 mt-28 sm:mt-60">
         <Card className="w-full border-black max-w-lg h-full">
           <CardContent className="flex flex-col pt-8 gap-8 justify-center">
             <div className="text-center">

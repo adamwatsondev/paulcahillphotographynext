@@ -36,7 +36,7 @@ export default async function Galleries() {
 
   return (
     <div className="flex flex-col gap-8 md:gap-20 pb-20">
-      <div className="flex flex-col px-4 md:px-10 lg:px-20 pb-20 mt-40">
+      <div className="flex flex-col px-4 md:px-10 lg:px-20 pb-20 mt-28 sm:mt-40">
         <span className="text-5xl font-bold text-center font-old-standard text-black mb-8">
           Galleries
         </span>
