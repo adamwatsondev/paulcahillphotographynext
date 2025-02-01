@@ -106,7 +106,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="flex flex-col gap-8 md:gap-20 pb-20 mt-40">
+    <div className="flex flex-col gap-8 md:gap-20 pb-20 mt-28 sm:mt-40">
       <span className="text-5xl capitalize font-bold text-center font-old-standard text-black">
         Checkout
       </span>
