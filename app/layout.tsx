@@ -43,7 +43,7 @@ export default function RootLayout({
           </div>
           {children}
           {/* Footer */}
-          <div className="fixed bottom-0 left-0 w-full h-12 bg-white shadow-md flex items-center justify-center">
+          <div className="fixed bottom-0 left-0 w-full sm:h-12 h-10 bg-white shadow-md flex items-center justify-center">
             <Footer />
           </div>
         </BasketProvider>

@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import BasketDrawer from "./basket-drawer";
+import { useBasket } from "@/app/context/basket-context";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { items } = useBasket();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -17,7 +19,7 @@ export default function Header() {
   };
 
   return (
-    <div className="flex w-full justify-between sm:px-32 h-28 items-center bg-white shadow-md relative">
+    <div className="flex w-full justify-between sm:px-32 h-20 pt-2 sm:pt-0 sm:h-28 items-start sm:items-center bg-white shadow-md relative">
       {/* Logo and Title */}
       <Link href="/" className="hidden lg:block items-start space-x-4">
         <div className="col-span-3 text-start flex flex-col text-black">
@@ -35,37 +37,32 @@ export default function Header() {
           onClick={toggleMenu}
           className="text-black bg-white focus:outline-none"
         >
-          {isMenuOpen ? (
-            <svg
-              className="w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-            >
+          <svg
+            className={`transition-all duration-500 ease-in-out ${
+              isMenuOpen
+                ? "w-6 h-6 opacity-100 scale-100"
+                : "w-6 h-6 mt-5 opacity-100 scale-100"
+            }`}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+          >
+            {isMenuOpen ? (
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 d="M6 18L18 6M6 6l12 12"
               />
-            </svg>
-          ) : (
-            <svg
-              className="w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-            >
+            ) : (
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 d="M4 6h16M4 12h16M4 18h16"
               />
-            </svg>
-          )}
+            )}
+          </svg>
         </button>
 
         {/* Navigation Menu (mobile) */}
@@ -103,9 +100,14 @@ export default function Header() {
             </Link>
             <span
               onClick={toggleDrawer}
-              className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400"
+              className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400 relative"
             >
               Basket
+              {items.length > 0 && (
+                <span className="absolute top-0 -right-5 w-4 h-4 bg-black text-white text-xs rounded-full flex items-center justify-center">
+                  {items.length}
+                </span>
+              )}
             </span>
           </nav>
         </div>
@@ -139,9 +141,14 @@ export default function Header() {
         </Link>
         <span
           onClick={toggleDrawer}
-          className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400 text-2xl"
+          className="text-black font-old-standard hover:cursor-pointer hover:underline hover:underline-offset-4 font-bold hover:text-gray-400 text-2xl relative"
         >
           Basket
+          {items.length > 0 && (
+            <span className="absolute top-0 -right-5 w-5 h-5 bg-black text-white text-xs rounded-full flex items-center justify-center">
+              {items.length}
+            </span>
+          )}
         </span>
       </nav>
 

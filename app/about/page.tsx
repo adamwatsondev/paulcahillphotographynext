@@ -41,7 +41,7 @@ export default async function About() {
 
   return (
     <div className="flex pb-20">
-      <div className="grid grid-cols-2 gap-12 2xl:gap-20 items-center justify-center mx-4 xl:mx-40 sm:mx-20 mt-40 xl:mt-60">
+      <div className="grid grid-cols-2 gap-12 2xl:gap-20 items-center justify-center mx-4 xl:mx-40 sm:mx-20 mt-28 sm:mt-40 xl:mt-60">
         <div className="xl:col-span-1 col-span-2 relative w-full aspect-[3/2]">
           {profileImage && (
             <Image
