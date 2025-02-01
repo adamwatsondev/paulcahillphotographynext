@@ -65,7 +65,6 @@ const BasketDrawer: React.FC<BasketDrawerProps> = ({ isOpen, onToggle }) => {
                 <Button
                   className="text-white bg-destructive h-8 w-16 font-bold mr-4 py-2 px-4 rounded-sm"
                   onClick={() => removeItem(item.id)}
-                  disabled={items.length === 1}
                 >
                   Remove
                 </Button>
