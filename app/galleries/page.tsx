@@ -47,7 +47,7 @@ export default async function Galleries() {
             <div key={product.public_id} className="flex flex-col gap-4">
               <Link href={`/galleries/${product.asset_folder.toLowerCase()}`}>
                 <Image
-                  className="w-full h-[250px] md:h-[500px] object-fit"
+                  className="w-full max-w-full hover:cursor-pointer h-auto aspect-[3/2] object-cover"
                   src={product.secure_url}
                   alt={product.public_id}
                   quality={100}

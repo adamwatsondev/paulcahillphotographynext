@@ -55,7 +55,7 @@ export default async function Home() {
           Featured Galleries
         </span>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {featuredGalleriesResults.map((product: CloudinaryResource) => (
             <div key={product.public_id} className="flex flex-col gap-4">
               <Link
@@ -64,7 +64,7 @@ export default async function Home() {
                   .toLowerCase()}`}
               >
                 <Image
-                  className="w-full h-[250px] md:h-[500px] object-fit"
+                  className="w-full max-w-full h-auto aspect-[3/2] object-cover"
                   src={product.secure_url}
                   alt={product.public_id}
                   quality={100}
